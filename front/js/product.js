@@ -61,25 +61,27 @@ function createColorsOptions(kanap) {
   });
 }
 
-// Envoi de données au localStorage
+//---------------------------------------------------------------------------------------------------------------------
 let button = document.querySelector("#addToCart");
 button.addEventListener("click", clickEvent);
 
+// Ajout d'un évènement click sur le bouton
 function clickEvent() {
   let color = document.querySelector("#colors").value;
   let quantity = document.querySelector("#quantity").value;
-  if (isOrderInvalid(color, quantity)) return;
+  if (isOrderInvalid(color, quantity)) return; // Si l'ordre est invalide, on ne fait rien
   addToCart(color, quantity);
   redirectToCart();
 }
 
+// Vérifie si l'ordre est invalide
 function isOrderInvalid(color, quantity) {
   if (color == "" || color == null || quantity == null || quantity < 1) {
     alert("Veuillez remplir tous les champs");
     return true;
   }
 }
-
+// Ajout d'un produit au panier
 function addToCart(color, quantity) {
   let key = `${id}-${color}`;
   let value = {
@@ -89,7 +91,7 @@ function addToCart(color, quantity) {
   };
   localStorage.setItem(key, JSON.stringify(value));
 }
-
+// Redirection vers la page panier
 function redirectToCart() {
   window.location.href = "cart.html";
 }
