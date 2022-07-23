@@ -44,12 +44,16 @@ fetch("http://localhost:3000/api/products")
 function displayKanaps(kanaps) {
   kanaps.forEach((kanap) => {
     let anchor = createAnchor(kanap);
+
     let article = document.createElement("article");
     anchor.appendChild(article);
+
     let img = createImg(kanap);
     article.appendChild(img);
+
     let h3 = createH3(kanap);
     article.appendChild(h3);
+
     let p = createP(kanap);
     article.appendChild(p);
   });
