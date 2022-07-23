@@ -63,7 +63,7 @@ function displayKanaps(kanaps) {
 function createAnchor(kanap) {
   let sectionItems = document.querySelector("#items");
   let anchor = document.createElement("a");
-  anchor.href = "product.html?id=" + kanap.id;
+  anchor.href = "product.html?id=" + kanap._id;
   sectionItems.appendChild(anchor);
   return anchor;
 }
