@@ -12,10 +12,11 @@ fetch("http://localhost:3000/api/products/" + id)
 
 // Affichage des produits
 function displayKanaps(kanap) {
-  let divImg = createDivImg(kanap);
-  let h1 = createH1(kanap);
-  let p = createP(kanap);
-  let colorsSelect = createColorsOptions(kanap);
+  createDivImg(kanap);
+  createH1(kanap);
+  createPrice(kanap);
+  createP(kanap);
+  createColorsOptions(kanap);
 }
 
 // Création de l'image pour chaque produit
@@ -35,6 +36,13 @@ function createH1(kanap) {
   return h1;
 }
 
+// Création du prix pour chaque produit
+function createPrice(kanap) {
+  let price = document.querySelector("#price");
+  price.textContent = kanap.price;
+  return price;
+}
+
 // Création de la description pour chaque produit
 function createP(kanap) {
   let p = document.querySelector("#description");
@@ -51,4 +59,37 @@ function createColorsOptions(kanap) {
     option.textContent = color;
     colorsSelect.appendChild(option);
   });
+}
+
+// Envoi de données au localStorage
+let button = document.querySelector("#addToCart");
+button.addEventListener("click", clickEvent);
+
+function clickEvent() {
+  let color = document.querySelector("#colors").value;
+  let quantity = document.querySelector("#quantity").value;
+  if (isOrderInvalid(color, quantity)) return;
+  addToCart(color, quantity);
+  redirectToCart();
+}
+
+function isOrderInvalid(color, quantity) {
+  if (color == "" || color == null || quantity == null || quantity < 1) {
+    alert("Veuillez remplir tous les champs");
+    return true;
+  }
+}
+
+function addToCart(color, quantity) {
+  let key = `${id}-${color}`;
+  let value = {
+    id: id,
+    color: color,
+    quantity: Number(quantity),
+  };
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function redirectToCart() {
+  window.location.href = "cart.html";
 }
