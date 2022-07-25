@@ -12,6 +12,9 @@ fetch("http://localhost:3000/api/products/" + id)
 
 // Affichage des produits
 function displayKanaps(kanap) {
+  imgUrl = kanap.imageUrl;
+  altText = kanap.altTxt;
+  articleName = kanap.name;
   createDivImg(kanap);
   createH1(kanap);
   createPrice(kanap);
@@ -21,8 +24,8 @@ function displayKanaps(kanap) {
 
 // Création de l'image pour chaque produit
 function createDivImg(kanap) {
-  let divImg = document.querySelector(".item__img");
-  let img = document.createElement("img");
+  const divImg = document.querySelector(".item__img");
+  const img = document.createElement("img");
   img.src = kanap.imageUrl;
   img.textContent = kanap.altTxt;
   divImg.appendChild(img);
@@ -31,30 +34,30 @@ function createDivImg(kanap) {
 
 // Création du titre pour chaque produit
 function createH1(kanap) {
-  let h1 = document.querySelector("#title");
+  const h1 = document.querySelector("#title");
   h1.textContent = kanap.name;
   return h1;
 }
 
 // Création du prix pour chaque produit
 function createPrice(kanap) {
-  let price = document.querySelector("#price");
+  const price = document.querySelector("#price");
   price.textContent = kanap.price;
   return price;
 }
 
 // Création de la description pour chaque produit
 function createP(kanap) {
-  let p = document.querySelector("#description");
+  const p = document.querySelector("#description");
   p.textContent = kanap.description;
   return p;
 }
 
 // Création des options de couleur pour chaque produit
 function createColorsOptions(kanap) {
-  let colorsSelect = document.querySelector("#colors");
+  const colorsSelect = document.querySelector("#colors");
   kanap.colors.forEach((color) => {
-    let option = document.createElement("option");
+    const option = document.createElement("option");
     option.value = color;
     option.textContent = color;
     colorsSelect.appendChild(option);
@@ -62,13 +65,14 @@ function createColorsOptions(kanap) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-let button = document.querySelector("#addToCart");
+
+const button = document.querySelector("#addToCart");
 button.addEventListener("click", clickEvent);
 
 // Ajout d'un évènement click sur le bouton
 function clickEvent() {
-  let color = document.querySelector("#colors").value;
-  let quantity = document.querySelector("#quantity").value;
+  const color = document.querySelector("#colors").value;
+  const quantity = document.querySelector("#quantity").value;
   if (isOrderInvalid(color, quantity)) return; // Si l'ordre est invalide, on ne fait rien
   addToCart(color, quantity);
   redirectToCart();
@@ -83,11 +87,14 @@ function isOrderInvalid(color, quantity) {
 }
 // Ajout d'un produit au panier
 function addToCart(color, quantity) {
-  let key = `${id}-${color}`;
-  let value = {
+  const key = `${id}-${color}`;
+  const value = {
     id: id,
     color: color,
     quantity: Number(quantity),
+    imageUrl: imgUrl,
+    altTxt: altText,
+    name: articleName,
   };
   localStorage.setItem(key, JSON.stringify(value));
 }
