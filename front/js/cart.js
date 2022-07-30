@@ -163,16 +163,6 @@ function createTotalQuantity() {
   document.querySelector("#totalQuantity").textContent = total;
 }
 
-// no double fetch :>
-// function createTotalPrice(data){
-//   let total = 0;
-//   cart.forEach((item) => {
-//     total += data.price * item.quantity;
-//   });
-//   document.querySelector("#totalPrice").textContent = total;
-// }
-
-// double fetch :<
 // Création du total price
 function createTotalPrice() {
   let total = 0;
@@ -187,7 +177,7 @@ function createTotalPrice() {
         .catch((error) => console.error(error));
     });
   } else {
-    document.querySelector("#totalPrice").textContent = total;
+    document.querySelector("#totalPrice").textContent = "";
   }
 }
 
@@ -245,7 +235,7 @@ function submitForm(e) {
   }
 
   if (isFormInvalid()) return;
-  if (isEmailInvalid()) return;
+  if (isInputInvalid()) return;
 
   const body = createRequestBody();
   fetch("http://localhost:3000/api/products/order", {
@@ -279,11 +269,36 @@ function isFormInvalid() {
 }
 
 // Détermine si l'email est invalide
-function isEmailInvalid() {
+function isInputInvalid() {
+  const firstName = document.querySelector("#firstName").value;
+  const lastName = document.querySelector("#lastName").value;
+  const address = document.querySelector("#address").value;
+  const city = document.querySelector("#city").value;
   const email = document.querySelector("#email").value;
-  const regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-  if (regex.test(email) === false) {
-    alert("Votre email est invalide");
+
+  const stringRegex = /[A-zÀ-ú-' ]{3,45}\b/;
+  const adressRegex = /[0-9]+[A-zÀ-ú-' ]{3,45}$/;
+  const emailRegex =
+    /(?!.*(?:''|\.\.))[A-zÀ-ú0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+
+  if (stringRegex.test(firstName) === false) {
+    alert("Veuillez entrer un prénom valide");
+    return true;
+  }
+  if (stringRegex.test(lastName) === false) {
+    alert("Veuillez entrer un nom valide");
+    return true;
+  }
+  if (stringRegex.test(city) === false) {
+    alert("Veuillez entrer une ville valide");
+    return true;
+  }
+  if (adressRegex.test(address) === false) {
+    alert("Veuillez entrer une adresse valide");
+    return true;
+  }
+  if (emailRegex.test(email) === false) {
+    alert("Veuillez entrer un email valide");
     return true;
   }
   return false;
