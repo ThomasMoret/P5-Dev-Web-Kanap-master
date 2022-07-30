@@ -236,8 +236,7 @@ function deleteArticle(item) {
   ItemToDelete.remove();
 }
 
-//----------------------------------------------------------------------------------
-
+// Création d'une requête d'envoi de commande à l'API
 function submitForm(e) {
   e.preventDefault();
   if (cart.length === 0) {
@@ -265,6 +264,7 @@ function submitForm(e) {
     .catch((error) => console.error(error));
 }
 
+// Détermine si le formulaire est invalide
 function isFormInvalid() {
   const isValid = false;
   const form = document.querySelector(".cart__order__form");
@@ -277,6 +277,8 @@ function isFormInvalid() {
     return isValid;
   });
 }
+
+// Détermine si l'email est invalide
 function isEmailInvalid() {
   const email = document.querySelector("#email").value;
   const regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
@@ -287,6 +289,7 @@ function isEmailInvalid() {
   return false;
 }
 
+// Création du body de la requête
 function createRequestBody() {
   const form = document.querySelector(".cart__order__form");
   const firstName = form.elements.firstName.value;
@@ -307,6 +310,7 @@ function createRequestBody() {
   return body;
 }
 
+// Récupération des ids des produits dans le localStorage
 function getIdsFromLocalStorage() {
   const numberOfProducts = localStorage.length;
   const ids = [];
