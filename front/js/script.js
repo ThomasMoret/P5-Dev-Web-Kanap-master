@@ -3,7 +3,10 @@ fetch("http://localhost:3000/api/products")
   .then((response) => response.json())
   .then((kanaps) => displayKanaps(kanaps))
   // géstion des erreurs
-  .catch((error) => console.error("Erreur : " + error));
+  .catch((error) => {
+    alert("Oops, il semblerait que nous n'ayons pas pu récupérer les données");
+    console.error(error);
+  });
 
 // Affichage des produits
 function displayKanaps(kanaps) {

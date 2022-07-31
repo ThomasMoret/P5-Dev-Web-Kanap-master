@@ -4,11 +4,17 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get("id");
 
+console.log(queryString);
+console.log(id);
+
 // Récupération des données du produit
 fetch("http://localhost:3000/api/products/" + id)
   .then((response) => response.json())
   .then((kanap) => displayKanaps(kanap))
-  .catch((error) => console.error("Erreur : " + error));
+  .catch((error) => {
+    alert("Oops, il semblerait que nous n'ayons pas pu récupérer les données");
+    console.error(error);
+  });
 
 // Affichage des produits
 function displayKanaps(kanap) {
@@ -73,7 +79,7 @@ button.addEventListener("click", clickEvent);
 function clickEvent() {
   const color = document.querySelector("#colors").value;
   const quantity = document.querySelector("#quantity").value;
-  if (isOrderInvalid(color, quantity)) return; // Si l'ordre est invalide, on ne fait rien
+  if (isOrderInvalid(color, quantity)) return;
   addToCart(color, quantity);
   redirectToCart();
 }
@@ -85,6 +91,7 @@ function isOrderInvalid(color, quantity) {
     return true;
   }
 }
+
 // Ajout d'un produit au panier
 function addToCart(color, quantity) {
   const key = `${id}-${color}`;
@@ -98,6 +105,7 @@ function addToCart(color, quantity) {
   };
   localStorage.setItem(key, JSON.stringify(value));
 }
+
 // Redirection vers la page panier
 function redirectToCart() {
   window.location.href = "cart.html";

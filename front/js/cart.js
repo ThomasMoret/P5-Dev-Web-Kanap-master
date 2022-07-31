@@ -9,11 +9,13 @@ cart.forEach((item) => {
     .then((data) => {
       displayKanaps(item, data);
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      alert(
+        "Oops, il semblerait que nous n'ayons pas pu récupérer les données"
+      );
+      console.error(error);
+    });
 });
-
-const orderButton = document.querySelector("#order");
-orderButton.addEventListener("click", (e) => submitForm(e));
 
 // Récupération du localStorage
 function getLocalStorage() {
@@ -225,6 +227,11 @@ function deleteArticle(item) {
   );
   ItemToDelete.remove();
 }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const orderButton = document.querySelector("#order");
+orderButton.addEventListener("click", (e) => submitForm(e));
 
 // Création d'une requête d'envoi de commande à l'API
 function submitForm(e) {
