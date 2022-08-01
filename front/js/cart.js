@@ -256,7 +256,6 @@ function submitForm(e) {
     .then((data) => {
       const orderId = data.orderId;
       window.location.href = "confirmation.html" + "?orderId=" + orderId;
-      console.log(data);
     })
     .catch((error) => console.error(error));
 }
@@ -275,7 +274,7 @@ function isFormInvalid() {
   });
 }
 
-// Détermine si l'email est invalide
+// Détermine si l'input est invalide
 function isInputInvalid() {
   const firstName = document.querySelector("#firstName").value;
   const lastName = document.querySelector("#lastName").value;
