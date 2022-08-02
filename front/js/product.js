@@ -13,7 +13,7 @@ fetch("http://localhost:3000/api/products/" + id)
   .then((kanap) => displayKanaps(kanap))
   .catch((error) => {
     alert("Oops, il semblerait que nous n'ayons pas pu récupérer les données");
-    console.error(error);
+    console.log(error);
   });
 
 // Affichage des produits
@@ -103,7 +103,13 @@ function addToCart(color, quantity) {
     altTxt: altText,
     name: articleName,
   };
-  localStorage.setItem(key, JSON.stringify(value));
+  if (localStorage.getItem(key) == null) {
+    localStorage.setItem(key, JSON.stringify(value));
+  } else {
+    const oldValue = JSON.parse(localStorage.getItem(key));
+    oldValue.quantity += Number(quantity);
+    localStorage.setItem(key, JSON.stringify(oldValue));
+  }
 }
 
 // Redirection vers la page panier

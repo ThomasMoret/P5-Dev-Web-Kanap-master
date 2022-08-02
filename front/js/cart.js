@@ -13,7 +13,7 @@ cart.forEach((item) => {
       alert(
         "Oops, il semblerait que nous n'ayons pas pu récupérer les données"
       );
-      console.error(error);
+      console.log(error);
     });
 });
 
@@ -176,7 +176,7 @@ function createTotalPrice() {
           total += data.price * item.quantity;
           document.querySelector("#totalPrice").textContent = total;
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.log(error));
     });
   } else {
     document.querySelector("#totalPrice").textContent = "";
@@ -288,23 +288,33 @@ function isInputInvalid() {
     /(?!.*(?:''|\.\.))[A-zÀ-ú0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 
   if (!stringRegex.test(firstName)) {
-    alert("Veuillez entrer un prénom valide");
+    const error = document.querySelector("#firstNameErrorMsg");
+    error.textContent = "Veuillez entrer un prénom valide";
+    error.style.color = "red";
     return true;
   }
   if (!stringRegex.test(lastName)) {
-    alert("Veuillez entrer un nom valide");
+    const error = document.querySelector("#lastNameErrorMsg");
+    error.textContent = "Veuillez entrer un nom valide";
+    error.style.color = "red";
     return true;
   }
   if (!stringRegex.test(city)) {
-    alert("Veuillez entrer une ville valide");
+    const error = document.querySelector("#cityErrorMsg");
+    error.textContent = "Veuillez entrer une ville valide";
+    error.style.color = "red";
     return true;
   }
   if (!adressRegex.test(address)) {
-    alert("Veuillez entrer une adresse valide");
+    const error = document.querySelector("#addressErrorMsg");
+    error.textContent = "Veuillez entrer une adresse valide";
+    error.style.color = "red";
     return true;
   }
   if (!emailRegex.test(email)) {
-    alert("Veuillez entrer un email valide");
+    const error = document.querySelector("#emailErrorMsg");
+    error.textContent = "Veuillez entrer une adresse email valide";
+    error.style.color = "red";
     return true;
   }
   return false;

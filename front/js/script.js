@@ -5,7 +5,7 @@ fetch("http://localhost:3000/api/products")
   // géstion des erreurs
   .catch((error) => {
     alert("Oops, il semblerait que nous n'ayons pas pu récupérer les données");
-    console.error(error);
+    console.log(error);
   });
 
 // Affichage des produits
