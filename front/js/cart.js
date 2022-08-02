@@ -59,7 +59,7 @@ function createDivImg(item) {
 
   const img = document.createElement("img");
   img.src = item.imageUrl;
-  img.textContent = item.altTxt;
+  img.alt = item.altTxt;
 
   divImg.appendChild(img);
 
@@ -287,23 +287,23 @@ function isInputInvalid() {
   const emailRegex =
     /(?!.*(?:''|\.\.))[A-zÀ-ú0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 
-  if (stringRegex.test(firstName) === false) {
+  if (!stringRegex.test(firstName)) {
     alert("Veuillez entrer un prénom valide");
     return true;
   }
-  if (stringRegex.test(lastName) === false) {
+  if (!stringRegex.test(lastName)) {
     alert("Veuillez entrer un nom valide");
     return true;
   }
-  if (stringRegex.test(city) === false) {
+  if (!stringRegex.test(city)) {
     alert("Veuillez entrer une ville valide");
     return true;
   }
-  if (adressRegex.test(address) === false) {
+  if (!adressRegex.test(address)) {
     alert("Veuillez entrer une adresse valide");
     return true;
   }
-  if (emailRegex.test(email) === false) {
+  if (!emailRegex.test(email)) {
     alert("Veuillez entrer un email valide");
     return true;
   }

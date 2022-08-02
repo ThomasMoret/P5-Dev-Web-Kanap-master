@@ -33,7 +33,7 @@ function createDivImg(kanap) {
   const divImg = document.querySelector(".item__img");
   const img = document.createElement("img");
   img.src = kanap.imageUrl;
-  img.textContent = kanap.altTxt;
+  img.alt = kanap.altTxt;
   divImg.appendChild(img);
   return divImg;
 }

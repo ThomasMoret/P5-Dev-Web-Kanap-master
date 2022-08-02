@@ -40,7 +40,7 @@ function createAnchor(kanap) {
 function createImg(kanap) {
   const img = document.createElement("img");
   img.src = kanap.imageUrl;
-  img.textContent = kanap.altTxt;
+  img.alt = kanap.altTxt;
   return img;
 }
 
